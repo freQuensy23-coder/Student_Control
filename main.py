@@ -60,6 +60,7 @@ def get_activity_text():
     return text
 
 
+
 def get_total_activity_text():
     return  "*TOTAL: *" + get_spreadsheet_data(config.total_time)[0][0] + " ч.\n"
 
@@ -74,18 +75,20 @@ def get_msg_text():
 
 def send_msg():
     msg_text = get_msg_text()
+    #print(msg_text)
     url = ("https://api.telegram.org/bot" + config.telegram_key + "/sendMessage?chat_id=" + config.admins_chat_id + "&text=" + msg_text + "&parse_mode=Markdown")
     r = requests.get(url, config.proxy)
+    print("Msg sended")
 
 
 CREDENTIALS_FILE = config.file
 service = auth(CREDENTIALS_FILE)
 
 
-while True:
-    # try:
+if True:
     if True:
         now = datetime.datetime.now()
+
         if now.hour == config.notify_hour:
             send_msg()
             time.sleep(60*60*12-100)
